@@ -1,0 +1,64 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn myBtn myBtnCreate mt-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  Skapa ny konsult
+</button>
+
+<table class="table mt-3">
+  <thead>
+    <tr>
+      <th class="col konsultContent">Konsult Id</th>
+      <th class="col konsultContent">Förnamn</th>
+      <th class="col konsultContent">Efternamn</th>
+      <th class="col konsultContent">Startdatum</th>
+      <th class="col konsultContent">Ändra/radera konsult</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col konsultContent">1</td>
+      <td class="col konsultContent">Stefan</td>
+      <td class="col konsultContent">Brunotte</td>
+      <td class="col konsultContent">20220401</td>
+      <td class="col konsultContent">
+        <button class="btn btn-success myBtn me-3">Uppdatera</button>
+        |
+        <button class="btn btn-danger myBtn ms-3">Radera</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Skapa ny konsult</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">ID</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Förnamn</label>
+            <input type="password" class="form-control" id="exampleInputPassword1">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Efternamn</label>
+            <input type="password" class="form-control" id="exampleInputPassword1">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Anställningsdatum</label>
+            <input type="password" class="form-control" id="exampleInputPassword1">
+          </div>
+          <button type="submit" class="btn myBtn myBtnSubmit">Spara konsult</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

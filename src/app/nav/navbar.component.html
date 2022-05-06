@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Konsult Bonus</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,900;1,400&display=swap" rel="stylesheet">
+
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg myNavbar">
+    <div class="container-fluid">
+      <a class="navbar-brand" (click)="goToPage('startsida')">Gisys</a>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link" (click)="goToPage('konsulter')">Konsulter</a>
+          <a class="nav-link" [routerLink]="['/konsulter/ny']">Skapa konsult</a>
+          <a class="nav-link" [routerLink]="['/konsult-dashboard']">Ny konsult modal</a>
+          <a class="nav-link" (click)="goToPage('bonus')">Bonusberäkning</a>
+        </div>
+      </div>
+      <div class="navbar-nav navbar-header navbar-right">
+        <a class="nav-link" [routerLink]="['user/profile']">User </a>
+        <a class="nav-link" [routerLink]="['skapa-konsult/nykonsult']">Ny konsult</a>
+      </div>
+    </div>
+  </nav>
+  <!-- The routed views render in the <router-outlet>-->
+  <router-outlet></router-outlet>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<body class="mt-5">
+  <h3>Räkna ut konsultbonus</h3>
+  <hr />
+  
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="NettoResultat" class="control-label">Netto resultat</label>
+        <input type="text" class="form-control" id="NettoResultat" name="NettoResultat" value="" />
+      </div>
+
+      <div class="form-group">
+        <label for="Bonuspott" class="control-label">Bonuspott</label>
+        <input type="text" class="form-control" id="Bonuspott" name="Bonuspott" value="" />
+      </div>
+
+      <div class="form-group">
+        <label for="NumberOfYearsInFirm" class="control-label">Anställning (år)</label>
+        <input type="text" class="form-control" id="NumberOfYearsInFirm" name="NumberOfYearsInFirm" value="" />
+      </div>
+
+      <div class="form-group">
+        <label for="DebiteradeTimmar" class="control-label">Debiterade timmar</label>
+        <input type="text" class="form-control" id="DebiteradeTimmar" name="DebiteradeTimmar" value="" />
+      </div>
+
+      <div class="form-group">
+        <label for="BonusProcent" class="control-label">Bonus i %</label>
+        <input type="text" class="form-control" id="DebiteradeTimmar" name="BonusProcent" value="" />
+      </div>
+
+      <div class="form-group">
+        <label for="BonusKr" class="control-label">Bonus i kr</label>
+        <input type="text" class="form-control" id="BonusKr" name="BonusKr" value="" />
+      </div>
+      <hr />
+      <div>
+        <span><button type="submit" class="btn btn-success myBtn" id="add" value="add">Beräkna bonus</button></span>
+        <span><button class="btn myBtn myBtnHome ms-5" (click)="goToPage('/')">Tillbaka till start</button></span>
+      </div>
+    </div>
+  </div>
+</body>

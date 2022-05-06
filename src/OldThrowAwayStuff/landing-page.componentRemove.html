@@ -1,0 +1,111 @@
+<style>
+  :host {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 14px;
+    color: #333;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* ---- Custom Style ----*/
+  .customMT {
+    margin-top: 70px;
+  }
+  .center {
+    margin: 0 auto;
+  }
+
+  .linkStyle {
+    text-decoration: none !important;
+    color: #3ac2a6;
+  }
+
+    .linkStyle:hover {
+      color: #3ac2a6
+    }
+
+  .myH1 {
+    padding: 50px 0;
+    text-align: center;
+  }
+
+  .table th,
+  table td {
+    border-top: 0px;
+    vertical-align: middle !important;
+  }
+
+  .myBtn {
+    color: #fff;
+    background-color: #4ab7a1;
+    border-color: #4ab7a1;
+    border-radius: 0;
+    text-transform: uppercase;
+    font-size: 12px;
+  }
+
+  .myBtnEdit,
+  .myBtnDelete {
+    background-color: transparent;
+    border-color: transparent;
+    padding: 0;
+  }
+
+  .myBtnEdit {
+    color: #4ab7a1;
+  }
+
+  .myBtnDelete {
+    color: red;
+  }
+
+  .backAnchor {
+    color: #4ab7a1;
+  }
+
+  .backAnchor:hover {
+    color: black;
+    text-decoration: none;
+  }
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Konsult Bonus</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,900;1,400&display=swap" rel="stylesheet">
+  
+</head>
+<body class="text-center ">
+  <div class="container">
+    <!--<h1 class="customMT">Konsultbonus beräkning</h1>
+    <h3>Gisys arbetsprov</h3>
+
+    <hr />
+    <br />-->
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+          <a routerlink="konsult-lista" routerLinkActive="active" class="linkStyle">
+            <img src="/assets/images/konsult.png" class="" alt="Konsultsida bild" />
+            <h3 class="mb-5">Konsultsida</h3>
+          </a>
+        </div>
+        <div class="col-sm">
+          <a class="linkStyle" href="">
+            <img src="assets/images/bonus.png" class="" alt="Bonussida bild" />
+            <h3 class="mb-5">Bonussida</h3>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- The routed views render in the <router-outlet>-->
+  <router-outlet></router-outlet>
+</body>
+</html>

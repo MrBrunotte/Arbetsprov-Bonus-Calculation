@@ -1,1 +1,60 @@
-/* You can add global styles to this file, and also import other style files */
+/* -----Navbar and link styles----- */
+
+.myNavbar {
+  background-color: #2ABB9B;
+}
+
+.navbar-brand {
+  color: white;
+}
+
+.nav-link,
+.navbar-nav {
+  color: black !important;
+}
+
+.nav-link,
+.navbar-brand {
+  cursor: pointer;
+}
+/* -----My Button styles----- */
+.myBtn {
+  color: #fff;
+  background-color: #4ab7a1;
+  border-color: #4ab7a1;
+  border-radius: 0;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.myBtnEdit,
+.myBtnDelete {
+  background-color: transparent;
+  border-color: transparent;
+  padding: 0;
+}
+
+.myBtnEdit {
+  color: #4ab7a1;
+}
+.myBtnSave {
+  color: lawngreen;
+}
+.myBtnDelete {
+  color: red;
+}
+.myBtnSubmit {
+  background-color: #2abb9b !important;
+}
+.myBtnCreate {
+  background-color: orange !important;
+}
+.myBtnCancel {
+    background-color: gray !important;
+}
+.myBtnBack {
+  background-color: lightgray !important;
+}
+.myBtnHome {
+  border: 1px solid black !important;
+}

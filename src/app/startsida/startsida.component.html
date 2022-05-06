@@ -1,0 +1,89 @@
+<body class="mb-5">
+  <h1 class="text-center mt-5 mb-4">Välkommen till Gisys arbetsprov</h1>
+  <p class="text-center fst-italic">
+    Du ska bygga en liten webbapplikation för att beräkna bonus för ett litet konsultbolag. Bonusen baseras på bolagets nettoresultat och beräknas individuellt per konsult baserat på hur stor del av den
+    totala debiteringen som konsulten bidragit till. Dessutom belönas de som varit anställda en längre tid med en viss lojalitetsfaktor.
+  </p>
+  <p class="fw-bold">Applikationen ska bestå av tre vyer;</p>
+  <ul>
+    <li>Startsida - Information och navigering till de två andra sidorna</li>
+    <li>Konsulter - Vy med CRUD funktionalitet</li>
+    <li>Bonusberäkning - CRUD funktionalitet</li>
+  </ul>
+
+  <H4>Vy 1 - Startsida</H4>
+  <p>Startsida med navigering till de olika sidorna</p>
+  <H4>Vy 2 - Konsulter</H4>
+  <p>
+    Denna sida ska innehålla funktionalitet för att lista, lägga till, redigera samt ta bort konsulter ur systemet. Konsultens namn samt anställningsdatum skall sparas.
+  </p>
+  <p>Informationen ska persisteras på valfritt sätt.</p>
+  <H4>Vy 3 - Bonusberäkning</H4>
+  <p>
+    Denna sida ska innehålla funktionalitet för att producera ett bonusunderlag. För varje konsult som
+    finns registrerad i systemet så ska användaren kunna ange antal debiterade timmar. Användaren
+    behöver även kunna ange bolagets nettoresultat. Därefter ska bonus beräknas enligt formeln
+    beskriven nedan.
+  </p>
+  <h5>Beräkninga av bonus</h5>
+  <p>Varje konsult får en lojalitetsfaktor Lk, baserat på antal hela anställda år enligt tabellen nedan:</p>
+  <img src="/assets/images/Lojalitetsfaktor.jpg" alt="bild över lojalitetsfaktorer" />
+  <p>
+    Varje konsult får också en debiteringspoäng Dk som räknas ut genom Dk = Tk * Lk där Tk är antal debiterade timmar för konsulten, och Lk är lojalitetsfaktorn.
+  </p>
+  <p>
+    Låt summan av alla debiteringspoäng Dk vara Dt. <br />
+    5 % av bolagets nettoresultat läggs i en bonuspott.<br />
+    Konsultens andel av bonuspotten Bk = Dk / Dt.
+  </p>
+  <h6 class="fst-italic fw-bold">Exempelberäkning med 2 konsulter</h6>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <p>Bolaget har 100 000 SEK i nettoresultat.</p>
+        <p>Konsult 1 har varit anställd i 3 år.</p>
+        <p>Han har debiterat 150 timmar.</p>
+        <p>Konsult 2 har varit anställd i 1 år.</p>
+        <p>Hon har debiterat 160 timmar.</p>
+        <p>Summan av alla debiteringspoäng:</p>
+        <p>Konsult 1 andel av bonuspotten:</p>
+        <p>Konsult 2 andel av bonuspotten:</p>
+        <p>Konsult 1 får i bonus:</p>
+        <p>Konsult 2 får i bonus:</p>
+      </div>
+      <div class="col">
+        <p>Bonuspott = 100 000 * 0,05 = 5 000 SEK</p>
+        <p>Lk1 = 1,3</p>
+        <p>Dk1 = Lk1 * 150 = 195</p>
+        <p>Lk2 = 1,1</p>
+        <p>Dk2 = Lk2 * 160 = 176</p>
+        <p>Dt = Dk1 + Dk2 = 371</p>
+        <p>Bk1 = Dk1 / Dt = 195 / 371 ≈ 52,6%</p>
+        <p>Bk2 = Dk2 / Dt = 176 / 371 ≈ 47,4%</p>
+        <p>5 000 * (195 / 371) ≈ 2 628 SEK</p>
+        <p>5 000 * (176 / 371) ≈ 2 372 SEK</p>
+      </div>
+    </div>
+  </div>
+  <h5>Övriga krav på systemet</h5>
+  <ul>
+    <li>Systemet ska ha ett designat och användarvänligt webb-baserat GUI</li>
+    <li>Systemet ska bygga på Angular</li>
+    <li>Systemet ska bygga på Microsoft.NET och vara skrivet i C#</li>
+    <li>
+      <ul>
+        <li>Givetvis är HTML, CSS, JavaScript osv tillåtet.</li>
+        <li>Du får använda valfria tredjepartkomponenter. Var beredd på att motivera dina val.</li>
+      </ul>
+    </li>
+    <li>Systemet ska ha lämpliga servervalideringar</li>
+    <li>Systemet ska ha lämpliga klientvalideringar</li>
+    <li>Systemet ska byggas med Entity Framework</li>
+  </ul>
+
+  <h5>Meriterande extrauppgifter</h5>
+  <ul>
+    <li>Enhetstesta bonusuträkningen</li>
+    <li>Implementera inloggning med vettiga roller</li>
+  </ul>
+</body>
