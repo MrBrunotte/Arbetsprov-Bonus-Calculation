@@ -14,15 +14,15 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td class="col konsultContent">1</td>
-      <td class="col konsultContent">Stefan</td>
-      <td class="col konsultContent">Brunotte</td>
-      <td class="col konsultContent">20220401</td>
+    <tr *ngFor="let row of konsulterData!">
+      <td>{{row.id}}</td>
+      <td>{{row.firstName}}</td>
+      <td>{{row.lastName}}</td>
+      <td>{{row?.startingDate}}</td>
       <td class="col konsultContent">
         <button class="btn btn-success myBtn me-3">Uppdatera</button>
         |
-        <button class="btn btn-danger myBtn ms-3">Radera</button>
+        <button class="btn btn-danger myBtn ms-3" (click)="deleteKonsult(row)">Radera</button>
       </td>
     </tr>
   </tbody>

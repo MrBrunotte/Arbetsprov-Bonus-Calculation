@@ -13,6 +13,7 @@ export class KonsultDashboardComponent implements OnInit {
 
   formValue!: FormGroup;
   konsultModelObj: KonsultModel = new KonsultModel();
+  konsulterData!: any;
   constructor(private router: Router, private formbuilder: FormBuilder, private api : ApiService) { }
 
   ngOnInit(): void {
@@ -22,8 +23,9 @@ export class KonsultDashboardComponent implements OnInit {
       lastName : [''],
       startingDate : Date,
     })
+    this.getAllKonsulter();
   }
-  // post konsult
+  // POST konsult method
   postKonsultDetails() {
     this.konsultModelObj.firstName = this.formValue.value.firstName;
     this.konsultModelObj.lastName = this.formValue.value.lastName;
@@ -38,9 +40,26 @@ export class KonsultDashboardComponent implements OnInit {
         ref?.click();
         // reset form
         this.formValue.reset();
+        this.getAllKonsulter();
       },
       err => {
         alert("Något gick fel, konsulten är ej tillagd!")
+      })
+  }
+
+  // GET konsult method
+  getAllKonsulter() {
+    this.api.getKunsult()
+      .subscribe(res => {
+        this.konsulterData = res;
+      })
+  }
+  //DELETE konsult
+  deleteKonsult(row : any) {
+    this.api.deleteKunsult(row.id)
+      .subscribe(res => {
+        alert("Konsulten är raderad!");
+        this.getAllKonsulter()
       })
   }
 }
