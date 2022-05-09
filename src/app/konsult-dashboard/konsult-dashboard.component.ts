@@ -33,7 +33,6 @@ export class KonsultDashboardComponent implements OnInit {
 
     this.api.postKunsult(this.konsultModelObj)
       .subscribe(res=> {
-        console.log(res);
         alert("Konsulten är nu tillagd!")
         // ångra knappen, ångra referensen 
         let ref = document.getElementById('cancel')
@@ -55,11 +54,15 @@ export class KonsultDashboardComponent implements OnInit {
       })
   }
   //DELETE konsult
-  deleteKonsult(row : any) {
+  deleteKonsult(row: any) {
+    console.log(`delete ${row.id}`);
     this.api.deleteKunsult(row.id)
       .subscribe(res => {
         alert("Konsulten är raderad!");
-        this.getAllKonsulter()
+        this.getAllKonsulter();
       })
   }
+
 }
+
+

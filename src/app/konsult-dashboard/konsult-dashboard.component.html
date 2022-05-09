@@ -1,5 +1,5 @@
 <!-- Button trigger modal -->
-<button type="button" class="btn myBtn myBtnCreate mt-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+<button class="btn myBtn myBtnCreate mt-3" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
   Skapa ny konsult
 </button>
 
@@ -20,7 +20,7 @@
       <td>{{row.lastName}}</td>
       <td>{{row?.startingDate}}</td>
       <td class="col konsultContent">
-        <button class="btn btn-success myBtn me-3">Uppdatera</button>
+        <button class="btn btn-success myBtn me-3"type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Uppdatera</button>
         |
         <button class="btn btn-danger myBtn ms-3" (click)="deleteKonsult(row)">Radera</button>
       </td>
@@ -54,7 +54,7 @@
           </div>
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Anställningsdatum</label>
-            <input type="date" formControlName="Date" class="form-control" id="exampleInputPassword1">
+            <input type="date" formControlName="startingDate" class="form-control" id="exampleInputPassword1">
           </div>
         </form>
         <div class="modal-footer">
