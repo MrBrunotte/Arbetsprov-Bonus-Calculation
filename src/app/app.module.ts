@@ -15,6 +15,8 @@ import { KonsultDetailsComponent } from './konsult/konsult-details/konsult-detai
 import { Error404Component } from './errors/404.component'
 import { KonsultRouteActivator } from './konsult/konsult-details/konsult-route-activator.service';
 import { KonsultDashboardComponent } from './konsult-dashboard/konsult-dashboard.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { KonsultDashboardComponent } from './konsult-dashboard/konsult-dashboard
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers:
     [

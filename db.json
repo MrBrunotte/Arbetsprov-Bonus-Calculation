@@ -1,0 +1,65 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    },
+    {
+      "id": 2,
+      "firstName": "st",
+      "lastName": "fsa"
+    },
+    {
+      "id": 3,
+      "firstName": "stefan",
+      "lastName": "Brunotte"
+    },
+    {
+      "id": 4,
+      "firstName": "Gina",
+      "lastName": "Aguilera"
+    },
+    {
+      "id": 5,
+      "firstName": "Viggo",
+      "lastName": "Brunotte"
+    },
+    {
+      "id": 6,
+      "firstName": "Viggo",
+      "lastName": "Brunotte"
+    },
+    {
+      "id": 7,
+      "firstName": "stefan2",
+      "lastName": "Brunotte"
+    },
+    {
+      "id": 8,
+      "firstName": "test",
+      "lastName": "test",
+      "startingDate": ""
+    },
+    {
+      "id": 9,
+      "firstName": "sfasf",
+      "lastName": "afas"
+    },
+    {
+      "id": 10,
+      "firstName": "fads",
+      "lastName": "fadfas"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
