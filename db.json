@@ -5,6 +5,18 @@
       "firstName": "Stefan",
       "lastName": "Brunotte",
       "startingDate": "2022-04-01"
+    },
+    {
+      "id": 2,
+      "firstName": "Ragge",
+      "lastName": "Bitar",
+      "startingDate": "2022-04-01"
+    },
+    {
+      "id": 3,
+      "firstName": "Håkan",
+      "lastName": "Rahm",
+      "startingDate": "1991-05-01"
     }
   ],
   "comments": [],
