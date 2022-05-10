@@ -1,5 +1,5 @@
 <!-- Button trigger modal -->
-<button class="btn myBtn myBtnCreate mt-3" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+<button (click)="clickAddKonsult()" class="btn myBtn myBtnCreate mt-3" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
   Skapa ny konsult
 </button>
 
@@ -20,7 +20,7 @@
       <td>{{row.lastName}}</td>
       <td>{{row?.startingDate}}</td>
       <td class="col konsultContent">
-        <button class="btn btn-success myBtn me-3"type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Uppdatera</button>
+        <button class="btn btn-success myBtn me-3" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="onEdit(row)">Uppdatera</button>
         |
         <button class="btn btn-danger myBtn ms-3" (click)="deleteKonsult(row)">Radera</button>
       </td>
@@ -58,7 +58,8 @@
           </div>
         </form>
         <div class="modal-footer">
-          <button type="button" class="btn myBtn myBtnSubmit" (click)="postKonsultDetails()">Spara konsult</button>
+          <button type="button"class="btn myBtn myBtnSubmit" *ngIf="showLTBtn" (click)="postKonsultDetails()">Spara konsult</button>
+          <button type="button"class="btn myBtn myBtnSubmit" *ngIf="showUDBtn" (click)="updateKonsultDetails()">Uppdatera konsult</button>
           <button type="button" id="cancel" class="btn myBtn myBtnCancel" data-bs-dismiss="modal">Ångra</button>
         </div>
       </div>

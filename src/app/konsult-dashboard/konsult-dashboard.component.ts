@@ -14,6 +14,8 @@ export class KonsultDashboardComponent implements OnInit {
   formValue!: FormGroup;
   konsultModelObj: KonsultModel = new KonsultModel();
   konsulterData!: any;
+  showLTBtn!: boolean;
+  showUDBtn!: boolean;
   constructor(private router: Router, private formbuilder: FormBuilder, private api : ApiService) { }
 
   ngOnInit(): void {
@@ -25,6 +27,13 @@ export class KonsultDashboardComponent implements OnInit {
     })
     this.getAllKonsulter();
   }
+  // Hide Lägg till button method
+  clickAddKonsult() {
+    this.formValue.reset();
+    this.showLTBtn = true;
+    this.showUDBtn = false;
+  }
+  
   // POST konsult method
   postKonsultDetails() {
     this.konsultModelObj.firstName = this.formValue.value.firstName;
@@ -62,7 +71,31 @@ export class KonsultDashboardComponent implements OnInit {
         this.getAllKonsulter();
       })
   }
+  //EDIT konsult
+  onEdit(row: any) {
+    this.showLTBtn = false;
+    this.showUDBtn = true;
 
+    this.konsultModelObj.id = row.id;
+
+    this.formValue.controls['firstName'].setValue(row.firstName);
+    this.formValue.controls['lastName'].setValue(row.lastName);
+    this.formValue.controls['startingDate'].setValue(row.startingDate);
+  }
+  updateKonsultDetails() {
+    this.konsultModelObj.firstName = this.formValue.value.firstName;
+    this.konsultModelObj.lastName = this.formValue.value.lastName;
+    this.konsultModelObj.startingDate = this.formValue.value.startingDate;
+
+    this.api.updateKunsult(this.konsultModelObj, this.konsultModelObj.id)
+      .subscribe(res => {
+        alert("Konsulten är uppdaterad!");
+        let ref = document.getElementById('cancel')
+        ref?.click();
+       this.formValue.reset();
+        this.getAllKonsulter();
+      })
+  }
 }
 
 
