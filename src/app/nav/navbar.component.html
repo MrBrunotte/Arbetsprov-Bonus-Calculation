@@ -13,17 +13,11 @@
   <nav class="navbar navbar-expand-lg myNavbar">
     <div class="container-fluid">
       <a class="navbar-brand" (click)="goToPage('startsida')">Gisys</a>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-link" (click)="goToPage('konsulter')">Konsulter</a>
-          <a class="nav-link" [routerLink]="['/konsulter/ny']">Skapa konsult</a>
-          <a class="nav-link" [routerLink]="['/konsult-dashboard']">Ny konsult modal</a>
-          <a class="nav-link" (click)="goToPage('bonus')">Bonusberäkning</a>
-        </div>
-      </div>
+      <!--<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      </div>-->
       <div class="navbar-nav navbar-header navbar-right">
-        <a class="nav-link" [routerLink]="['user/profile']">User </a>
-        <a class="nav-link" [routerLink]="['skapa-konsult/nykonsult']">Ny konsult</a>
+        <a class="nav-link" [routerLink]="['/konsult-dashboard']">Konsulter</a>
+        <a class="nav-link" (click)="goToPage('bonus')">Bonusberäkning</a>
       </div>
     </div>
   </nav>
