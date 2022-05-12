@@ -17,6 +17,17 @@
 .navbar-brand {
   cursor: pointer;
 }
+.debHours {
+  font-weight: 700;
+  text-align: center;
+}
+.centerText {
+    text-align: center;
+}
+.nettoResultatBox {
+    width: 40% !important;
+    text-transform: uppercase;
+}
 /* -----My Button styles----- */
 .myBtn {
   color: #fff;
@@ -51,6 +62,7 @@
 }
 .myBtnCancel {
     background-color: gray !important;
+    color: white !important;
 }
 .myBtnBack {
   background-color: lightgray !important;
@@ -58,3 +70,8 @@
 .myBtnHome {
   border: 1px solid black !important;
 }
+.debHours {
+    font-weight: 700;
+    text-align: center;
+}
+

@@ -3,10 +3,11 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\konsult\\shared",
-    "\\src\\skapa-konsult",
-    "\\src\\user"
+    "\\src\\app\\bonus",
+    "\\src\\app\\konsult-dashboard",
+    "\\src\\app\\nav",
+    "\\src\\app\\shared"
   ],
-  "SelectedNode": "\\src\\app\\app-routing.module.ts",
+  "SelectedNode": "\\src\\app\\konsult-dashboard\\konsult-dashboard.component.html",
   "PreviewInSolutionExplorer": false
 }

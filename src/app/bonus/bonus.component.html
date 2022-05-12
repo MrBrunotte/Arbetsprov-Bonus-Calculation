@@ -1,43 +1,61 @@
-<body class="mt-5">
-  <h3>Räkna ut konsultbonus</h3>
-  <hr />
-  
-  <div class="row">
-    <div class="col-md-6">
-      <div class="form-group">
-        <label for="NettoResultat" class="control-label">Netto resultat</label>
-        <input type="text" class="form-control" id="NettoResultat" name="NettoResultat" value="" />
-      </div>
+<h3 class="mt-5">Räkna ut konsultbonus</h3>
+<hr />
+<div class="input-group mb-3 nettoResultatBox">
+  <span class="input-group-text">Ange Nettoresultat</span>
+  <input type="text" class="form-control" aria-label="Ange Netto resultat">
+  <!--<button (click)="postNettoResultat()" class="btn myBtn myBtnCreate" type="button" id="button-addon2">Spara</button>-->
+</div>
 
-      <div class="form-group">
-        <label for="Bonuspott" class="control-label">Bonuspott</label>
-        <input type="text" class="form-control" id="Bonuspott" name="Bonuspott" value="" />
-      </div>
+<table class="table myTable mt-3">
+  <thead>
+    <tr>
+      <th class="col konsultContent centerText">Konsult Id</th>
+      <th class="col konsultContent">Förnamn</th>
+      <th class="col konsultContent">Efternamn</th>
+      <th class="col konsultContent centerText">Startdatum</th>
+      <th class="col konsultContent centerText">Debiterade timmar</th>
+      <th class="col konsultContent centerText">Bonus</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of konsulterData!">
+      <td class="centerText">{{row.id}}</td>
+      <td class="">{{row.firstName}}</td>
+      <td class="">{{row.lastName}}</td>
+      <td class="centerText">{{row?.startingDate | date: 'yyyy-MM-dd'}}</td>
+      <td class="debHours">{{row.hours}}</td>
+      <td class="centerText">0</td>
+      <td class="centerText">
+        <button class="btn myBtn myBtnCreate ms-3" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" (click)="onEdit(row)">Lägg till timmar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- Beräkna bonus input-->
+<div class="input-group mb-3 nettoResultatBox">
+  <button (click)="postNettoResultat()" class="btn myBtn myBtnSubmit" type="button">Beräkna konsult bonusar</button>
+</div>
 
-      <div class="form-group">
-        <label for="NumberOfYearsInFirm" class="control-label">Anställning (år)</label>
-        <input type="text" class="form-control" id="NumberOfYearsInFirm" name="NumberOfYearsInFirm" value="" />
+<!-- Modal bonus-->
+<div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Beräkna konsultbonus</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-
-      <div class="form-group">
-        <label for="DebiteradeTimmar" class="control-label">Debiterade timmar</label>
-        <input type="text" class="form-control" id="DebiteradeTimmar" name="DebiteradeTimmar" value="" />
-      </div>
-
-      <div class="form-group">
-        <label for="BonusProcent" class="control-label">Bonus i %</label>
-        <input type="text" class="form-control" id="DebiteradeTimmar" name="BonusProcent" value="" />
-      </div>
-
-      <div class="form-group">
-        <label for="BonusKr" class="control-label">Bonus i kr</label>
-        <input type="text" class="form-control" id="BonusKr" name="BonusKr" value="" />
-      </div>
-      <hr />
-      <div>
-        <span><button type="submit" class="btn btn-success myBtn" id="add" value="add">Beräkna bonus</button></span>
-        <span><button class="btn myBtn myBtnHome ms-5" (click)="goToPage('/')">Tillbaka till start</button></span>
+      <div class="modal-body">
+        <form [formGroup]="formValue">
+          <div class="mb-3">
+            <label for="bonusCalculationModal" class="form-label">Debiterade timmar</label>
+            <input type="number" formControlName="hours" class="form-control" id="bonusCalculationModal">
+          </div>
+        </form>
+        <div class="modal-footer">
+          <button type="button" class="btn myBtn myBtnCreate" (click)="updateKonsultDetails()">Lägg till timmar</button>
+          <button type="button" id="cancel" class="btn myBtn myBtnCancel" data-bs-dismiss="modal">Ångra</button>
+        </div>
       </div>
     </div>
   </div>
-</body>
+</div>

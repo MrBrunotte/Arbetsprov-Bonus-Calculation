@@ -25,3 +25,20 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+# JSON-SERVER
+
+[json-server npm](https://www.npmjs.com/package/json-server)
+
+## run the server
+
+To run the json-server type the command: json-server --watch db.jason
+
+it will run on http://localhost:3000/
+
+### Create Service for api (s = service)
+
+Command to create service: ng g s shared/api
+
+Command to create component: ng g c <nameOfComponent>

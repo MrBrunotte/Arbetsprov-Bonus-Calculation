@@ -9,10 +9,17 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  //POST method
-  postKunsult(data: any) {
+  //POST method (create ny konsult modal)
+  postKonsult(data: any) {
     return this.http.post<any>("http://localhost:3000/posts", data)
       .pipe(map((res: any)=> {
+        return res;
+      }))
+  }
+  // POST bonus method (Bonus modal)
+  postKonsultBonusDetails(data: any) {
+    return this.http.post<any>("http://localhost:3000/posts", data)
+      .pipe(map((res: any) => {
         return res;
       }))
   }

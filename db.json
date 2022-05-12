@@ -4,19 +4,29 @@
       "id": 1,
       "firstName": "Stefan",
       "lastName": "Brunotte",
+      "hours": 10,
       "startingDate": "2022-04-01"
     },
     {
       "id": 2,
       "firstName": "Ragge",
       "lastName": "Bitar",
+      "hours": 15,
       "startingDate": "2022-04-01"
     },
     {
       "id": 3,
       "firstName": "Håkan",
       "lastName": "Rahm",
+      "hours": 20,
       "startingDate": "1991-05-01"
+    },
+    {
+      "id": 4,
+      "firstName": "Gustaf",
+      "lastName": "Wangel",
+      "hours": 30,
+      "startingDate": "2021-04-01"
     }
   ],
   "comments": [],

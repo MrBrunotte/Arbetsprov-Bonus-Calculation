@@ -3,26 +3,26 @@
   Skapa ny konsult
 </button>
 
-<table class="table mt-3">
+<table class="table myTable mt-3">
   <thead>
     <tr>
-      <th class="col konsultContent">Konsult Id</th>
-      <th class="col konsultContent">Förnamn</th>
-      <th class="col konsultContent">Efternamn</th>
-      <th class="col konsultContent">Startdatum</th>
-      <th class="col konsultContent">Ändra/radera konsult</th>
+      <th class="col konsultContent  centerText">Konsult Id</th>
+      <th class="col konsultContent  centerText">Förnamn</th>
+      <th class="col konsultContent  centerText">Efternamn</th>
+      <th class="col konsultContent  centerText">Startdatum</th>
+      <th class="col konsultContent  centerText">Ändra/radera konsult</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let row of konsulterData!">
-      <td>{{row.id}}</td>
-      <td>{{row.firstName}}</td>
-      <td>{{row.lastName}}</td>
-      <td>{{row?.startingDate}}</td>
-      <td class="col konsultContent">
+      <td class="centerText">{{row.id}}</td>
+      <td class="centerText">{{row.firstName}}</td>
+      <td class="centerText">{{row.lastName}}</td>
+      <td class="centerText">{{row?.startingDate | date: 'yyyy-MM-dd'}}</td>
+      <td class="col konsultContent centerText">
         <button class="btn btn-success myBtn me-3" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="onEdit(row)">Uppdatera</button>
         |
-        <button class="btn btn-danger myBtn ms-3" (click)="deleteKonsult(row)">Radera</button>
+        <button class="btn btn-danger myBtn ms-3 me-3 " (click)="deleteKonsult(row)">Radera</button>
       </td>
     </tr>
   </tbody>
@@ -40,26 +40,58 @@
       </div>
       <div class="modal-body">
         <form [formGroup]="formValue">
-          <!-- <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">ID</label>
-            <input type="text" formControlName="id" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          </div> -->
           <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Förnamn</label>
-            <input type="text" formControlName="firstName" class="form-control" id="exampleInputPassword1">
+            <label for="createConsultantModal" class="form-label">Förnamn</label>
+            <input type="text" formControlName="firstName" class="form-control" id="createConsultantModal">
           </div>
           <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Efternamn</label>
-            <input type="text" formControlName="lastName" class="form-control" id="exampleInputPassword1">
+            <label for="createConsultantModal" class="form-label">Efternamn</label>
+            <input type="text" formControlName="lastName" class="form-control" id="createConsultantModal">
           </div>
           <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Anställningsdatum</label>
-            <input type="date" formControlName="startingDate" class="form-control" id="exampleInputPassword1">
+            <label for="createConsultantModal" class="form-label">Anställningsdatum</label>
+            <input type="date" formControlName="startingDate" class="form-control" id="createConsultantModal">
           </div>
         </form>
         <div class="modal-footer">
-          <button type="button"class="btn myBtn myBtnSubmit" *ngIf="showLTBtn" (click)="postKonsultDetails()">Spara konsult</button>
-          <button type="button"class="btn myBtn myBtnSubmit" *ngIf="showUDBtn" (click)="updateKonsultDetails()">Uppdatera konsult</button>
+          <button type="button" class="btn myBtn myBtnSubmit" *ngIf="showLTBtn" (click)="postKonsultDetails()">Spara konsult</button>
+          <button type="button" class="btn myBtn myBtnSubmit" *ngIf="showUDBtn" (click)="updateKonsultDetails()">Uppdatera konsult</button>
+          <button type="button" id="cancel" class="btn myBtn myBtnCancel" data-bs-dismiss="modal">Ångra</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal bonus-->
+<div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Beräkna konsultbonus</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formValue">
+          <div class="mb-3">
+            <label for="bonusCalculationModal" class="form-label">Debiterade timmar</label>
+            <input type="number" formControlName="firstName" class="form-control" id="bonusCalculationModal">
+          </div>
+          <div class="mb-3">
+            <label for="bonusCalculationModal" class="form-label">Årets nettoresultat</label>
+            <input type="number" formControlName="lastName" class="form-control" id="bonusCalculationModal">
+          </div>
+          <div class="mb-3">
+            <label for="bonusCalculationModal" class="form-label">Bonus %</label>
+            <input type="number" formControlName="bonusPercent" class="form-control" id="bonusCalculationModal">
+          </div>
+          <div class="mb-3">
+            <label for="bonusCalculationModal" class="form-label">Bonus kr</label>
+            <input type="number" formControlName="BonusSEK" class="form-control" id="bonusCalculationModal" >
+          </div>
+        </form>
+        <div class="modal-footer">
+          <button type="button" class="btn myBtn myBtnCreate">Beräkna</button>
           <button type="button" id="cancel" class="btn myBtn myBtnCancel" data-bs-dismiss="modal">Ångra</button>
         </div>
       </div>
