@@ -1,3 +1,7 @@
+a:hover {
+  color: #000 !important;
+}
+
 /* -----Navbar and link styles----- */
 
 .myNavbar {
@@ -25,8 +29,11 @@
     text-align: center;
 }
 .nettoResultatBox {
-    width: 40% !important;
+    width: 90% !important;
     text-transform: uppercase;
+}
+.myBoldText {
+    font-weight: 700;
 }
 /* -----My Button styles----- */
 .myBtn {

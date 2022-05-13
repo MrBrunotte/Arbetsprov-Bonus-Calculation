@@ -10,8 +10,16 @@ import { KonsultModel } from '../konsult-dashboard/konsult-dashboard.model';
   styleUrls: ['./bonus.component.css']
 })
 export class BonusComponent implements OnInit{
-  constructor(private router: Router, private formbuilder: FormBuilder, private api: ApiService) { }
-
+  constructor(private router: Router, private formbuilder: FormBuilder, private api: ApiService) {
+    this.bonusAmount = 0;
+    this.bonusPercentage = 0.05;
+    this.netResult = 700000;
+    this.displayNetResult = '0';
+  }
+  displayNetResult: string;
+  netResult: number;
+  bonusAmount: number;
+  bonusPercentage: number;
   formValue!: FormGroup;
   konsultModelObj: KonsultModel = new KonsultModel();
   konsulterData!: any;
@@ -30,25 +38,6 @@ export class BonusComponent implements OnInit{
   postNettoResultat() {
 
   }
-
-  // POST konsult debiterade timmar
-  //postKonsultBonus() {
-  //  this.konsultModelObj.hours = this.formValue.value.hours;
-
-  //  this.api.postKonsult(this.konsultModelObj)
-  //    .subscribe(res => {
-  //      alert("Debiterade timmar är nu tillagda!")
-  //      // ångra knappen, ångra referensen 
-  //      let ref = document.getElementById('cancel')
-  //      ref?.click();
-  //      // reset form
-  //      this.formValue.reset();
-  //      this.getAllKonsulter();
-  //    },
-  //      err => {
-  //        alert("Något gick fel, timmarna är ej tillagda!")
-  //      })
-  //}
 
   //EDIT konsult debiterade timmar
   onEdit(row: any) {
@@ -81,5 +70,15 @@ export class BonusComponent implements OnInit{
       .subscribe(res => {
         this.konsulterData = res;
       })
+  }
+
+  // get nettoresultat input from user
+  getNettoResultatInput(netResult: any) {
+    console.log(netResult)
+    this.displayNetResult = netResult
+  }
+  // method to calculate total company bonus
+  calculateBonus() {
+    this.bonusAmount = Number(this.displayNetResult) * this.bonusPercentage
   }
 }

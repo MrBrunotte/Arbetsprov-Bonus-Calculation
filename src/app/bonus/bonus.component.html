@@ -1,10 +1,29 @@
 <h3 class="mt-5">Räkna ut konsultbonus</h3>
 <hr />
-<div class="input-group mb-3 nettoResultatBox">
-  <span class="input-group-text">Ange Nettoresultat</span>
-  <input type="text" class="form-control" aria-label="Ange Netto resultat">
-  <!--<button (click)="postNettoResultat()" class="btn myBtn myBtnCreate" type="button" id="button-addon2">Spara</button>-->
+
+<div class="row justify-content-start">
+  <div class="col-6">
+    <div class="input-group mb-3 nettoResultatBox">
+      <span class="input-group-text">Ange Nettoresultat:</span>
+      <input type="string" #box (keyup)="getNettoResultatInput(box.value)" name="nettoResultatInput" class="form-control" aria-label="Ange Netto resultat">
+      <button (click)="calculateBonus()" class="btn myBtn myBtnSubmit" type="button">Beräkna</button>
+    </div>
+    <!--<div class="input-group mb-3 nettoResultatBox">
+    <span class="input-group-text">Ange Nettoresultat:</span>
+    <input type="string" #box (keyup)="getNettoResultatInput(box.value)" name="nettoResultatInput" class="form-control" aria-label="Ange Netto resultat">
+      <span class="input-group-text">
+    <button (click)="calculateBonus()" class="btn myBtn myBtnSubmit" type="button">Beräkna konsult bonusar</button>
+    </span>
+  </div>-->
+  </div>
+  <div class="col-2">
+    <p>Bonusgrund: <span class="myBoldText">{{displayNetResult}}</span></p>
+  </div>
+  <div class="col-2">
+    <p>Totalbonus: <span class="myBoldText">{{bonusAmount}}</span></p>
+  </div>
 </div>
+
 
 <table class="table myTable mt-3">
   <thead>
@@ -24,17 +43,14 @@
       <td class="">{{row.lastName}}</td>
       <td class="centerText">{{row?.startingDate | date: 'yyyy-MM-dd'}}</td>
       <td class="debHours">{{row.hours}}</td>
-      <td class="centerText">0</td>
+      <td class="debHours">{{bonusAmount * row.hours}}</td>
       <td class="centerText">
         <button class="btn myBtn myBtnCreate ms-3" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" (click)="onEdit(row)">Lägg till timmar</button>
       </td>
     </tr>
   </tbody>
 </table>
-<!-- Beräkna bonus input-->
-<div class="input-group mb-3 nettoResultatBox">
-  <button (click)="postNettoResultat()" class="btn myBtn myBtnSubmit" type="button">Beräkna konsult bonusar</button>
-</div>
+  
 
 <!-- Modal bonus-->
 <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
