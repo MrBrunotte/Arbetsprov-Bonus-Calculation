@@ -5,7 +5,7 @@
   <div class="col-6">
     <div class="input-group mb-3 nettoResultatBox">
       <span class="input-group-text">Ange Nettoresultat:</span>
-      <input type="string" #box (keyup)="getNettoResultatInput(box.value)" name="nettoResultatInput" class="form-control" aria-label="Ange Netto resultat">
+      <input type="text" #box (keyup)="getNettoResultatInput(box.value)" name="nettoResultatInput" class="form-control" aria-label="Ange Netto resultat">
       <button (click)="calculateBonus()" class="btn myBtn myBtnSubmit" type="button">Beräkna</button>
     </div>
     <!--<div class="input-group mb-3 nettoResultatBox">
@@ -32,6 +32,7 @@
       <th class="col konsultContent">Förnamn</th>
       <th class="col konsultContent">Efternamn</th>
       <th class="col konsultContent centerText">Startdatum</th>
+      <th class="col konsultContent centerText">Lojalitetsfaktor</th>
       <th class="col konsultContent centerText">Debiterade timmar</th>
       <th class="col konsultContent centerText">Bonus</th>
     </tr>
@@ -42,6 +43,7 @@
       <td class="">{{row.firstName}}</td>
       <td class="">{{row.lastName}}</td>
       <td class="centerText">{{row?.startingDate | date: 'yyyy-MM-dd'}}</td>
+      <td class="debHours">{{calculateEmploymentDays(row?.startingDate)}}</td>
       <td class="debHours">{{row.hours}}</td>
       <td class="debHours">{{bonusAmount * row.hours}}</td>
       <td class="centerText">
@@ -68,7 +70,7 @@
           </div>
         </form>
         <div class="modal-footer">
-          <button type="button" class="btn myBtn myBtnCreate" (click)="updateKonsultDetails()">Lägg till timmar</button>
+          <button type="button" class="btn myBtn myBtnCreate" (click)="updateKonsultDetails()">Spara timmar</button>
           <button type="button" id="cancel" class="btn myBtn myBtnCancel" data-bs-dismiss="modal">Ångra</button>
         </div>
       </div>
