@@ -13,7 +13,7 @@ export class KonsultDashboardComponent implements OnInit {
 
   formValue!: FormGroup;
   konsultModelObj: KonsultModel = new KonsultModel();
-  konsulterData!: any;
+  konsulterData!: any[];
   showLTBtn!: boolean;
   showUDBtn!: boolean;
   constructor(private router: Router, private formbuilder: FormBuilder, private api : ApiService) { }
@@ -25,6 +25,7 @@ export class KonsultDashboardComponent implements OnInit {
       firstName : [''],
       lastName : [''],
       startingDate: Date,
+      debHours : [''],
     })
     this.getAllKonsulter();
   }
@@ -43,7 +44,7 @@ export class KonsultDashboardComponent implements OnInit {
 
     this.api.postKonsult(this.konsultModelObj)
       .subscribe(res=> {
-        alert("Konsulten är nu tillagd!")
+        //alert("Konsulten är nu tillagd!")
         // ångra knappen, ångra referensen 
         let ref = document.getElementById('cancel')
         ref?.click();
@@ -67,7 +68,7 @@ export class KonsultDashboardComponent implements OnInit {
     console.log(`delete ${row.id}`);
     this.api.deleteKunsult(row.id)
       .subscribe(res => {
-        alert("Konsulten är raderad!");
+        //alert("Konsulten är raderad!");
         this.getAllKonsulter();
       })
   }
@@ -89,7 +90,7 @@ export class KonsultDashboardComponent implements OnInit {
 
     this.api.updateKunsult(this.konsultModelObj, this.konsultModelObj.id)
       .subscribe(res => {
-        alert("Konsulten är uppdaterad!");
+        //alert("Konsulten är uppdaterad!");
         let ref = document.getElementById('cancel')
         ref?.click();
        this.formValue.reset();

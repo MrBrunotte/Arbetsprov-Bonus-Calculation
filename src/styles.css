@@ -1,9 +1,14 @@
 a:hover {
   color: #000 !important;
 }
-
+.hourInput {
+  width: 40% !important;
+  text-align: center;
+  background-color: #2ABB9B !important;
+  color: white !important;
+  font-weight: 700 !important;
+}
 /* -----Navbar and link styles----- */
-
 .myNavbar {
   background-color: #2ABB9B;
 }

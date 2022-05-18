@@ -2,25 +2,21 @@
 <hr />
 
 <div class="row justify-content-start">
-  <div class="col-6">
+  <div class="col-5">
     <div class="input-group mb-3 nettoResultatBox">
       <span class="input-group-text">Ange Nettoresultat:</span>
       <input type="text" #box (keyup)="getNettoResultatInput(box.value)" name="nettoResultatInput" class="form-control" aria-label="Ange Netto resultat">
-      <button (click)="calculateBonus()" class="btn myBtn myBtnSubmit" type="button">Beräkna</button>
+      <button (click)="calculateTotalBonus()" class="btn myBtn myBtnSubmit" type="button">Beräkna</button>
     </div>
-    <!--<div class="input-group mb-3 nettoResultatBox">
-    <span class="input-group-text">Ange Nettoresultat:</span>
-    <input type="string" #box (keyup)="getNettoResultatInput(box.value)" name="nettoResultatInput" class="form-control" aria-label="Ange Netto resultat">
-      <span class="input-group-text">
-    <button (click)="calculateBonus()" class="btn myBtn myBtnSubmit" type="button">Beräkna konsult bonusar</button>
-    </span>
-  </div>-->
   </div>
   <div class="col-2">
-    <p>Bonusgrund: <span class="myBoldText">{{displayNetResult}}</span></p>
+    <p>Netto resultat: <span class="myBoldText">{{displayNetResult}} kr</span></p>
   </div>
   <div class="col-2">
-    <p>Totalbonus: <span class="myBoldText">{{bonusAmount}}</span></p>
+    <p>Bonuspott: <span class="myBoldText">{{Bonuspott}} kr</span></p>
+  </div>
+  <div class="col-3">
+    <p>Totala bonus timmar: <span class="myBoldText">{{totalBonusHours}} tim</span></p>
   </div>
 </div>
 
@@ -28,33 +24,41 @@
 <table class="table myTable mt-3">
   <thead>
     <tr>
-      <th class="col konsultContent centerText">Konsult Id</th>
+      <th class="col konsultContent centerText">Id</th>
       <th class="col konsultContent">Förnamn</th>
       <th class="col konsultContent">Efternamn</th>
       <th class="col konsultContent centerText">Startdatum</th>
-      <th class="col konsultContent centerText">Lojalitetsfaktor</th>
-      <th class="col konsultContent centerText">Debiterade timmar</th>
+      <th class="col konsultContent centerText">Bonus faktor</th>
+      <th class="col konsultContent centerText">Timmar</th>
+      <th class="col konsultContent centerText">Bonus grund</th>
       <th class="col konsultContent centerText">Bonus</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let row of konsulterData!">
+    <tr *ngFor="let row of konsulterData">
       <td class="centerText">{{row.id}}</td>
       <td class="">{{row.firstName}}</td>
       <td class="">{{row.lastName}}</td>
       <td class="centerText">{{row?.startingDate | date: 'yyyy-MM-dd'}}</td>
-      <td class="debHours">{{calculateEmploymentDays(row?.startingDate)}}</td>
-      <td class="debHours">{{row.hours}}</td>
-      <td class="debHours">{{bonusAmount * row.hours}}</td>
+      <td class="debHours">{{calculateLojFactor(row?.startingDate)}}</td>
+      <td class="debHours">{{row?.debHours}} tim</td>
+      <td class="debHours">{{calculateEmploymentDays(row?.startingDate) * row.debHours}}</td>
+      <td class="debHours">0 kr</td>
       <td class="centerText">
         <button class="btn myBtn myBtnCreate ms-3" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" (click)="onEdit(row)">Lägg till timmar</button>
       </td>
     </tr>
   </tbody>
+  <!--<tfoot>
+    <tr>
+      <td>Totala bonus timmar:</td>
+      <td><input type="text" value="{{totalBonusHours}}" class="form-control input-sm hourInput" readonly /></td>
+    </tr>
+  </tfoot>-->
 </table>
   
 
-<!-- Modal bonus-->
+<!--Modal bonus-->
 <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -66,7 +70,7 @@
         <form [formGroup]="formValue">
           <div class="mb-3">
             <label for="bonusCalculationModal" class="form-label">Debiterade timmar</label>
-            <input type="number" formControlName="hours" class="form-control" id="bonusCalculationModal">
+            <input type="number" formControlName="debHours" class="form-control" id="bonusCalculationModal">
           </div>
         </form>
         <div class="modal-footer">

@@ -9,7 +9,7 @@ import { BonusComponent } from './bonus/bonus.component';
 import { StartsidaComponent } from './startsida/startsida.component';
 import { Error404Component } from './errors/404.component'
 import { KonsultDashboardComponent } from './konsult-dashboard/konsult-dashboard.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -25,6 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpClientModule
   ],
   providers:[],

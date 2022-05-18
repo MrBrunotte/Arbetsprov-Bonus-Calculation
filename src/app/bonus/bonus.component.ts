@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from '../shared/api.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { KonsultModel } from '../konsult-dashboard/konsult-dashboard.model';
 
 @Component({
@@ -10,24 +10,30 @@ import { KonsultModel } from '../konsult-dashboard/konsult-dashboard.model';
   styleUrls: ['./bonus.component.css']
 })
 export class BonusComponent implements OnInit{
-    dateToday: any;
-    startDate: any;
-    day: any;
-  constructor(private router: Router, private formbuilder: FormBuilder, private api: ApiService) {
-    this.bonusAmount = 0;
-    this.bonusPercentage = 0.05;
-    this.netResult = 700000;
-    this.displayNetResult = '0';
-    this.konsultModelObj.startingDate;
-  }
+  dateToday: any;
+  startDate: any;
+  day: any;
+  konsulterData: KonsultModel[] = [];
   displayNetResult: string;
   netResult: number;
-  bonusAmount: number;
+  Bonuspott: number;
+  totalBonusHours: number;
+  debHours: number;
   bonusPercentage: number;
+  lojFactor: number;
   startingDate!: Date;
   formValue!: FormGroup;
   konsultModelObj: KonsultModel = new KonsultModel();
-  konsulterData!: any;
+  constructor(private router: Router, private formbuilder: FormBuilder, private api: ApiService) {
+    this.Bonuspott = 0;
+    this.totalBonusHours = 0
+    this.lojFactor = 0;
+    this.bonusPercentage = 0.05;
+    this.debHours = 0;
+    this.netResult = 0;
+    this.displayNetResult = '0';
+    this.konsultModelObj.startingDate;
+  }
 
   ngOnInit(): void {
     this.formValue = this.formbuilder.group({
@@ -35,29 +41,26 @@ export class BonusComponent implements OnInit{
       firstName: [''],
       lastName: [''],
       startingDate: Date,
-      hours: [''],
+      debHours: [''],
     })
     this.getAllKonsulter();
+    
   }
-  // POST Nettoresultat
-  postNettoResultat() {
-
-  }
-
-  //EDIT konsult debiterade timmar
+  // hämta konsult för att lägga till timmar
   onEdit(row: any) {
     this.konsultModelObj.id = row.id;
 
     this.formValue.controls['firstName'].setValue(row.firstName);
     this.formValue.controls['lastName'].setValue(row.lastName);
     this.formValue.controls['startingDate'].setValue(row.startingDate);
-    this.formValue.controls['hours'].setValue(row.hours);
+    this.formValue.controls['debHours'].setValue(row.debHours);
   }
+  //EDIT konsult debiterade timmar
   updateKonsultDetails() {
     this.konsultModelObj.firstName = this.formValue.value.firstName;
     this.konsultModelObj.lastName = this.formValue.value.lastName;
     this.konsultModelObj.startingDate = this.formValue.value.startingDate;
-    this.konsultModelObj.hours = this.formValue.value.hours;
+    this.konsultModelObj.debHours = this.formValue.value.debHours;
 
     this.api.updateKunsult(this.konsultModelObj, this.konsultModelObj.id)
       .subscribe(res => {
@@ -74,6 +77,7 @@ export class BonusComponent implements OnInit{
     this.api.getKunsult()
       .subscribe(res => {
         this.konsulterData = res;
+        this.calculateTotalBonusHours(this.konsulterData)
       })
   }
 
@@ -82,79 +86,50 @@ export class BonusComponent implements OnInit{
     console.log(netResult)
     this.displayNetResult = netResult
   }
+
   // method to calculate total company bonus
-  calculateBonus() {
-    this.bonusAmount = Number(this.displayNetResult) * this.bonusPercentage
-    /*this.dayDiff(this.startingDate, Date.now):number*/
+  calculateTotalBonus() {
+    this.Bonuspott = Number(this.displayNetResult) * this.bonusPercentage
+  }
+
+  // calculate total bonus hours
+  calculateTotalBonusHours(konsulter: any) {
+    this.totalBonusHours = 0;
+    for (var i = 0; i < konsulter.length; i++) {
+      let konsult = konsulter[i]
+      this.totalBonusHours += this.calculateEmploymentDays(konsult.startingDate) * konsult.debHours
+    } 
   }
 
   // räkna ut dagar sedan anställning
-  calculateEmploymentDays(dataDate:any) {
-    //console.log('Anställningsdatum ',dataDate)
-    // hämtar startdatum för konsult
-    let startDate = new Date(dataDate)
-    this.startDate = Math.abs(startDate.getDay())
-    //console.log('GetTime() startDate: ', startDate.getTime())
+  calculateEmploymentDays(sinceStartDate:any) {
+    
+    let dateStart = new Date(sinceStartDate)    // hämtar startdatum för konsult
+    let dateToday = new Date()                  // hämtar dagens datum
+    let daysDiff = Math.abs(dateToday.getTime() - dateStart.getTime())     // räknar ut skillnaden i dagar mellan anställningsdatum och dagensdatum
+    let days = Math.floor(daysDiff / 86400000);    // Calculate days (1000*3600*24=86400000)
 
-    // hämtar dagens datum
-    let dateToday = new Date()
-    //console.log('GetTime() DateDate: ', dateToday.getTime())
-
-   // räknar ut skillnaden i dagar mellan anställningsdatum och dagensdatum
-    let diffDay = Math.abs(dateToday.getTime() - startDate.getTime())
-    let days = Math.floor(diffDay / 86400000); // day calculate (1000*3600*24=86400000)
-    //console.log('Skillnad i dagar', days)
-
-    // > 1 year
-    if (days < 365 ) {
-      console.log("LF 1")
+    // IF-statement checks lojalty factor from starting date
+    if (days < 365)                        // > Anställd mindre än 1 år
       return 1
-    }
-    // 1 year < and > 2 years
-    if (days > 365 && days < 730) {
-      console.log("LF 1,1")
-      return 1.1
-    }
-    // 2 year < and > 3 years
-    if (days > 730 && days < 1095) {
-      console.log("LF 1,2")
-      return 1.2
-    }
-    // 4 year < and > 4 years
-    if (days > 730 && days < 1095) {
-      console.log("LF 1,3")
-      return 1.3
-    }
-    // 4 year < and > 5 years
-    if (days > 1095 && days < 1460) {
-      console.log("LF 1,4")
-      return 1.2
-    }
-    // 5 years <
+    else if (days >= 365 && days < 730)     // Anställd 1 år
+      return 1.1    
+    else if (days >= 730 && days < 1095)    // Anställd 2 år
+      return 1.2    
+    else if (days >= 1095 && days < 1460)    // Anställd 3 år
+      return 1.3    
+    else if (days >= 1460 && days < 1825)   // Anställd 4 år
+      return 1.4
     else
-      console.log("LF 1,5")
-      return 1.5
+      return 1.5                           // Anställd 5 år eller längre
   }
 
-  // lojalitetsfaktor
-  //lojaltyFactor() {
-
-  //  switch (this.day) {
-  //    case 1:
-  //      if (this.day < 365) {
-  //        console.log("Lojalitetsfaktor = 1")
-  //      }
-  //      break;
-  //    case 2:
-  //      if (this.day < 365) {
-  //        console.log("Lojalitetsfaktor = 2")
-  //      }
-  //      break;
-  //  }
-  //}
-
+  // räkna ut lojalitetsfaktor
+  calculateLojFactor(days:any) {
+    this.lojFactor = this.calculateEmploymentDays(days)
+    //console.log(this.lojFactor)
+    return this.lojFactor
+  }
 }
 
-function dataDate(dataDate: any, any: any) {
-    throw new Error('Function not implemented.');
-}
+

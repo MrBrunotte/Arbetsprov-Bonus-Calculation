@@ -4,29 +4,36 @@
       "id": 1,
       "firstName": "Stefan",
       "lastName": "Brunotte",
-      "hours": 63,
-      "startingDate": "2022-05-16"
+      "debHours": 10,
+      "startingDate": "2022-04-01"
     },
     {
       "id": 2,
       "firstName": "Ragge",
       "lastName": "Bitar",
-      "hours": 54,
-      "startingDate": "2020-04-01"
+      "debHours": 10,
+      "startingDate": "2021-04-01"
     },
     {
       "id": 3,
-      "firstName": "Håkan",
-      "lastName": "Rahm",
-      "hours": 20,
-      "startingDate": "1991-05-01"
+      "firstName": "Calle",
+      "lastName": "Carlsson",
+      "debHours": 10,
+      "startingDate": "2020-02-18"
     },
     {
       "id": 4,
-      "firstName": "Gustaf",
-      "lastName": "Wangel",
-      "hours": 30,
-      "startingDate": "2021-04-01"
+      "firstName": "Gina",
+      "lastName": "Aguilera",
+      "debHours": 10,
+      "startingDate": "2019-04-05"
+    },
+    {
+      "id": 5,
+      "firstName": "Viggo",
+      "lastName": "Brunotte",
+      "debHours": 10,
+      "startingDate": "2015-02-18"
     }
   ],
   "comments": [],
