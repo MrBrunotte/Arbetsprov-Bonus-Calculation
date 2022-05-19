@@ -1,4 +1,10 @@
 <h3 class="mt-5">Räkna ut konsultbonus</h3>
+<p>För att räkna ut konsultbonusar följ dessa steg:</p>
+<ul>
+  <li>Ange nettoresultat</li>
+  <li>Lägg till timmar för varje konsult</li>
+  <li>Clicka på "Beräkna bonusar"</li>
+</ul>
 <hr />
 
 <div class="row justify-content-start">
@@ -6,14 +12,14 @@
     <div class="input-group mb-3 nettoResultatBox">
       <span class="input-group-text">Ange Nettoresultat:</span>
       <input type="text" #box (keyup)="getNettoResultatInput(box.value)" name="nettoResultatInput" class="form-control" aria-label="Ange Netto resultat">
-      <button (click)="calculateTotalBonus()" class="btn myBtn myBtnSubmit" type="button">Beräkna</button>
+      <!--<button (click)="calculateTotalBonus()" class="btn myBtn myBtnSubmit" type="button">Beräkna</button>-->
     </div>
   </div>
   <div class="col-2">
     <p>Netto resultat: <span class="myBoldText">{{displayNetResult}} kr</span></p>
   </div>
   <div class="col-2">
-    <p>Bonuspott: <span class="myBoldText">{{Bonuspott}} kr</span></p>
+    <p>Bonuspott: <span class="myBoldText">{{bonusPott}} kr</span></p>
   </div>
   <div class="col-3">
     <p>Totala bonus timmar: <span class="myBoldText">{{totalBonusHours}} tim</span></p>
@@ -28,10 +34,11 @@
       <th class="col konsultContent">Förnamn</th>
       <th class="col konsultContent">Efternamn</th>
       <th class="col konsultContent centerText">Startdatum</th>
-      <th class="col konsultContent centerText">Bonus faktor</th>
       <th class="col konsultContent centerText">Timmar</th>
+      <th class="col konsultContent centerText">Bonus faktor</th>
       <th class="col konsultContent centerText">Bonus grund</th>
-      <th class="col konsultContent centerText">Bonus</th>
+      <th class="col konsultContent centerText">Bonus %</th>
+      <th class="col konsultContent centerText">Bonus SEK</th>
     </tr>
   </thead>
   <tbody>
@@ -40,44 +47,45 @@
       <td class="">{{row.firstName}}</td>
       <td class="">{{row.lastName}}</td>
       <td class="centerText">{{row?.startingDate | date: 'yyyy-MM-dd'}}</td>
-      <td class="debHours">{{calculateLojFactor(row?.startingDate)}}</td>
-      <td class="debHours">{{row?.debHours}} tim</td>
-      <td class="debHours">{{calculateEmploymentDays(row?.startingDate) * row.debHours}}</td>
-      <td class="debHours">0 kr</td>
-      <td class="centerText">
+      <td class="centerText">{{row?.debHours}} tim</td>
+      <td class="debHours">{{calculateLojFactor(row?.startingDate)}}x</td>
+      <td class="debHours">{{calculateEmploymentDays(row?.startingDate) * row.debHours}} tim</td>
+      <td class="debHours">{{calculateBonusPercent(row?.debHours)}} %</td>
+      <td class="debHours">{{calculateTotalBonus()}} kr</td>
+      <td class="btnRight">
         <button class="btn myBtn myBtnCreate ms-3" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" (click)="onEdit(row)">Lägg till timmar</button>
       </td>
     </tr>
   </tbody>
-  <!--<tfoot>
-    <tr>
-      <td>Totala bonus timmar:</td>
-      <td><input type="text" value="{{totalBonusHours}}" class="form-control input-sm hourInput" readonly /></td>
-    </tr>
-  </tfoot>-->
 </table>
-  
+<div class="row justify-content-end">
+  <div class="col-2 btnRight">
+    <button (click)="calculateTotalBonus()" class="btn myBtn  myCalculateBonus" type="button">Beräkna bonusar</button>
+  </div>
+</div>
 
-<!--Modal bonus-->
-<div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Beräkna konsultbonus</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form [formGroup]="formValue">
-          <div class="mb-3">
-            <label for="bonusCalculationModal" class="form-label">Debiterade timmar</label>
-            <input type="number" formControlName="debHours" class="form-control" id="bonusCalculationModal">
+
+
+  <!--Modal bonus-->
+  <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Beräkna konsultbonus</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="formValue">
+            <div class="mb-3">
+              <label for="bonusCalculationModal" class="form-label">Debiterade timmar</label>
+              <input type="number" formControlName="debHours" class="form-control" id="bonusCalculationModal">
+            </div>
+          </form>
+          <div class="modal-footer">
+            <button type="button" class="btn myBtn myBtnCreate" (click)="updateKonsultDetails()">Spara timmar</button>
+            <button type="button" id="cancel" class="btn myBtn myBtnCancel" data-bs-dismiss="modal">Ångra</button>
           </div>
-        </form>
-        <div class="modal-footer">
-          <button type="button" class="btn myBtn myBtnCreate" (click)="updateKonsultDetails()">Spara timmar</button>
-          <button type="button" id="cancel" class="btn myBtn myBtnCancel" data-bs-dismiss="modal">Ångra</button>
         </div>
       </div>
     </div>
   </div>
-</div>

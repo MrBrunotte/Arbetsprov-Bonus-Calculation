@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {FormBuilder, FormGroup} from '@angular/forms'
+import {FormBuilder, FormGroup, Validators} from '@angular/forms'
 import { KonsultModel } from './konsult-dashboard.model';
 import { ApiService } from '../shared/api.service';
 
@@ -22,8 +22,8 @@ export class KonsultDashboardComponent implements OnInit {
    
     this.formValue = this.formbuilder.group({
       id : [''],
-      firstName : [''],
-      lastName : [''],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
       startingDate: Date,
       debHours : [''],
     })

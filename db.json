@@ -1,39 +1,27 @@
 {
   "posts": [
     {
-      "id": 1,
-      "firstName": "Stefan",
-      "lastName": "Brunotte",
-      "debHours": 10,
-      "startingDate": "2022-04-01"
-    },
-    {
       "id": 2,
       "firstName": "Ragge",
       "lastName": "Bitar",
-      "debHours": 10,
+      "debHours": 160,
+      "bonusPercent": 0,
       "startingDate": "2021-04-01"
-    },
-    {
-      "id": 3,
-      "firstName": "Calle",
-      "lastName": "Carlsson",
-      "debHours": 10,
-      "startingDate": "2020-02-18"
     },
     {
       "id": 4,
       "firstName": "Gina",
       "lastName": "Aguilera",
-      "debHours": 10,
+      "debHours": 150,
       "startingDate": "2019-04-05"
     },
     {
       "id": 5,
-      "firstName": "Viggo",
+      "firstName": "stefan",
       "lastName": "Brunotte",
-      "debHours": 10,
-      "startingDate": "2015-02-18"
+      "debHours": 100,
+      "bonusPercent": 0,
+      "startingDate": "2022-02-19"
     }
   ],
   "comments": [],

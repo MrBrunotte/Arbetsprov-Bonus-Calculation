@@ -16,19 +16,23 @@ export class BonusComponent implements OnInit{
   konsulterData: KonsultModel[] = [];
   displayNetResult: string;
   netResult: number;
-  Bonuspott: number;
+  bonusPott: number;
+  kBonus: number;
   totalBonusHours: number;
   debHours: number;
-  bonusPercentage: number;
+  //bonusPercentage: number; // sets the bonus percentage 5%
+  bonusPercent: number;
   lojFactor: number;
   startingDate!: Date;
   formValue!: FormGroup;
   konsultModelObj: KonsultModel = new KonsultModel();
   constructor(private router: Router, private formbuilder: FormBuilder, private api: ApiService) {
-    this.Bonuspott = 0;
+    this.bonusPott = 0;
+    this.kBonus = 0;
     this.totalBonusHours = 0
     this.lojFactor = 0;
-    this.bonusPercentage = 0.05;
+    //this.bonusPercentage = 0.05;
+    this.bonusPercent = 0;
     this.debHours = 0;
     this.netResult = 0;
     this.displayNetResult = '0';
@@ -41,11 +45,12 @@ export class BonusComponent implements OnInit{
       firstName: [''],
       lastName: [''],
       startingDate: Date,
-      debHours: [''],
+      debHours: ['', Validators.required],
     })
     this.getAllKonsulter();
     
   }
+
   // hämta konsult för att lägga till timmar
   onEdit(row: any) {
     this.konsultModelObj.id = row.id;
@@ -83,13 +88,7 @@ export class BonusComponent implements OnInit{
 
   // get nettoresultat input from user
   getNettoResultatInput(netResult: any) {
-    console.log(netResult)
     this.displayNetResult = netResult
-  }
-
-  // method to calculate total company bonus
-  calculateTotalBonus() {
-    this.Bonuspott = Number(this.displayNetResult) * this.bonusPercentage
   }
 
   // calculate total bonus hours
@@ -108,7 +107,7 @@ export class BonusComponent implements OnInit{
     let dateToday = new Date()                  // hämtar dagens datum
     let daysDiff = Math.abs(dateToday.getTime() - dateStart.getTime())     // räknar ut skillnaden i dagar mellan anställningsdatum och dagensdatum
     let days = Math.floor(daysDiff / 86400000);    // Calculate days (1000*3600*24=86400000)
-
+    
     // IF-statement checks lojalty factor from starting date
     if (days < 365)                        // > Anställd mindre än 1 år
       return 1
@@ -128,8 +127,30 @@ export class BonusComponent implements OnInit{
   calculateLojFactor(days:any) {
     this.lojFactor = this.calculateEmploymentDays(days)
     //console.log(this.lojFactor)
-    return this.lojFactor
+    return this.lojFactor;
+  }
+  // calculate bonus in percent
+  calculateBonusPercent(bonusHours: any) {
+    let bonusPercent = (this.lojFactor * bonusHours / this.totalBonusHours) * 100;
+    return Math.round(bonusPercent);
+  }
+
+  // calculate bonus in SEK
+  calculateBonusSEK(bonusHours: any) {
+    let totBonusPott = this.netResult * this.bonusPercent;
+    let konsultBonus = totBonusPott * this.bonusPercent;
+    //let bonusSEK = (this.lojFactor * bonusHours);
+    return konsultBonus;
+  }
+
+  // method to calculate total company bonus
+  calculateTotalBonus() {
+    const bonusPercentage = 0.05;
+    this.bonusPott = Number(this.displayNetResult) * bonusPercentage
+    const kBonus = this.bonusPott * ((this.lojFactor * this.debHours) / this.totalBonusHours)
+    return Math.round(kBonus);
   }
 }
+
 
 

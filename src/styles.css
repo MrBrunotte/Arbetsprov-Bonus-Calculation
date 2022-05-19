@@ -82,8 +82,16 @@ a:hover {
 .myBtnHome {
   border: 1px solid black !important;
 }
+.myCalculateBonus {
+  background-color: #2abb9b !important;
+  color: white !important;
+  margin-right: 6px;
+}
+.btnRight {
+    text-align: right !important;
+}
 .debHours {
-    font-weight: 700;
-    text-align: center;
+  font-weight: 700;
+  text-align: center;
 }
 

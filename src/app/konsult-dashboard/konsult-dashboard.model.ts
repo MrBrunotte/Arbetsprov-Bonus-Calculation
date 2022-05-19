@@ -6,6 +6,7 @@ export class KonsultModel {
   lastName : string = '';
   startingDate!: Date;
   debHours: number = 0;
+  bonusPercent: number = 0;
 }
 
 
