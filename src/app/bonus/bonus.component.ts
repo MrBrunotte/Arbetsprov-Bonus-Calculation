@@ -19,7 +19,7 @@ export class BonusComponent implements OnInit{
   kBonus: number = 0;
   totalBonusHours: number;
   debHours: number;
-  bonusPercentage: number; // sets the bonus percentage 5%
+  bonusPercentage: number; 
   bonusPercent: number;
   lojFactor: number;
   startingDate!: Date;
@@ -30,7 +30,7 @@ export class BonusComponent implements OnInit{
     this.bonusPott = 0;
     this.totalBonusHours = 0
     this.lojFactor = 0;
-    this.bonusPercentage = 0.05;
+    this.bonusPercentage = 0.05; // sets the bonus percentage 5%
     this.bonusPercent = 0;
     this.debHours = 0;
     this.netResult = 0;

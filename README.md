@@ -1,4 +1,25 @@
-# Bonus
+# Gisys Arbetsprov - Konsultberäkning
+
+## Objective
+Build a webbapplication that calculates bonuses for a small consultant company. The bonus is based on the company's net result and is calculated individually for every consultant based on their individual hourly input. The bonus is also based on a lojalty factor depending on number of years the consultant have worked for the company
+
+### Webbapplication 
+
+  - Startingpage - Information and navigation to the other pages
+  - Consultants - List of consultants with CRUD functionality
+  - Bonus calculation - Calculates the different bonuses for each consultant
+
+#### Startpage
+
+Starting page with navigation to the other two pages
+
+#### Consultants
+
+CRUD functionality. The constultants name and employment date should be saved in a database
+
+#### Bonus calculation
+
+Functionality to calculate all consultants individual bonuses. You should be able to add each consultants work hours, the companies net result.
 
 ## start the program
 

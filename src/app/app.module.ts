@@ -11,7 +11,6 @@ import { Error404Component } from './errors/404.component'
 import { KonsultDashboardComponent } from './konsult-dashboard/konsult-dashboard.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { TestCompComponent } from './test-comp/test-comp.component';
 
 @NgModule({
   declarations: [
@@ -20,8 +19,7 @@ import { TestCompComponent } from './test-comp/test-comp.component';
     BonusComponent,
     StartsidaComponent,
     Error404Component,
-    KonsultDashboardComponent,
-    TestCompComponent
+    KonsultDashboardComponent
   ],
   imports: [
     BrowserModule,
