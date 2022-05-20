@@ -13,25 +13,24 @@ export class BonusComponent implements OnInit{
   dateToday: any;
   startDate: any;
   day: any;
-  konsulterData: KonsultModel[] = [];
   displayNetResult: string;
   netResult: number;
   bonusPott: number;
-  kBonus: number;
+  kBonus: number = 0;
   totalBonusHours: number;
   debHours: number;
-  //bonusPercentage: number; // sets the bonus percentage 5%
+  bonusPercentage: number; // sets the bonus percentage 5%
   bonusPercent: number;
   lojFactor: number;
   startingDate!: Date;
   formValue!: FormGroup;
+  konsulterData: KonsultModel[] = [];
   konsultModelObj: KonsultModel = new KonsultModel();
   constructor(private router: Router, private formbuilder: FormBuilder, private api: ApiService) {
     this.bonusPott = 0;
-    this.kBonus = 0;
     this.totalBonusHours = 0
     this.lojFactor = 0;
-    //this.bonusPercentage = 0.05;
+    this.bonusPercentage = 0.05;
     this.bonusPercent = 0;
     this.debHours = 0;
     this.netResult = 0;
@@ -51,7 +50,15 @@ export class BonusComponent implements OnInit{
     
   }
 
-  // hämta konsult för att lägga till timmar
+  // GET Consultants from json db
+  getAllKonsulter() {
+    this.api.getKunsult()
+      .subscribe(res => {
+        this.konsulterData = res;
+        this.calculateTotalBonusHours(this.konsulterData)
+      })
+  }
+  // Edit each row for the consultants
   onEdit(row: any) {
     this.konsultModelObj.id = row.id;
 
@@ -60,7 +67,7 @@ export class BonusComponent implements OnInit{
     this.formValue.controls['startingDate'].setValue(row.startingDate);
     this.formValue.controls['debHours'].setValue(row.debHours);
   }
-  //EDIT konsult debiterade timmar
+  //EDIT hours in modal
   updateKonsultDetails() {
     this.konsultModelObj.firstName = this.formValue.value.firstName;
     this.konsultModelObj.lastName = this.formValue.value.lastName;
@@ -69,7 +76,6 @@ export class BonusComponent implements OnInit{
 
     this.api.updateKunsult(this.konsultModelObj, this.konsultModelObj.id)
       .subscribe(res => {
-        //alert("Konsultens timmar är nu uppdaterade!");
         let ref = document.getElementById('cancel')
         ref?.click();
         this.formValue.reset();
@@ -77,21 +83,7 @@ export class BonusComponent implements OnInit{
       })
   }
 
-  // GET konsult method
-  getAllKonsulter() {
-    this.api.getKunsult()
-      .subscribe(res => {
-        this.konsulterData = res;
-        this.calculateTotalBonusHours(this.konsulterData)
-      })
-  }
-
-  // get nettoresultat input from user
-  getNettoResultatInput(netResult: any) {
-    this.displayNetResult = netResult
-  }
-
-  // calculate total bonus hours
+  // calculate total bonus hours (Totala bouns timmar output)
   calculateTotalBonusHours(konsulter: any) {
     this.totalBonusHours = 0;
     for (var i = 0; i < konsulter.length; i++) {
@@ -100,7 +92,7 @@ export class BonusComponent implements OnInit{
     } 
   }
 
-  // räkna ut dagar sedan anställning
+  // räkna ut dagar sedan anställning (Bonus faktor column)
   calculateEmploymentDays(sinceStartDate:any) {
     
     let dateStart = new Date(sinceStartDate)    // hämtar startdatum för konsult
@@ -123,34 +115,27 @@ export class BonusComponent implements OnInit{
       return 1.5                           // Anställd 5 år eller längre
   }
 
-  // räkna ut lojalitetsfaktor
-  calculateLojFactor(days:any) {
+  // räkna ut lojalitetsfaktor (Bonus faktor column)
+  calculateLojaltyFactor(days:any) {
     this.lojFactor = this.calculateEmploymentDays(days)
-    //console.log(this.lojFactor)
     return this.lojFactor;
   }
-  // calculate bonus in percent
-  calculateBonusPercent(bonusHours: any) {
-    let bonusPercent = (this.lojFactor * bonusHours / this.totalBonusHours) * 100;
-    return Math.round(bonusPercent);
+  // calculate bonus in percent (Bonus % column)
+  calculateBonusPercent(hours: any) {
+    let bonusPercent = (this.lojFactor * hours / this.totalBonusHours).toFixed(3);
+    return bonusPercent;
   }
 
-  // calculate bonus in SEK
-  calculateBonusSEK(bonusHours: any) {
-    let totBonusPott = this.netResult * this.bonusPercent;
-    let konsultBonus = totBonusPott * this.bonusPercent;
-    //let bonusSEK = (this.lojFactor * bonusHours);
-    return konsultBonus;
+  // get nettoresultat input from user (Ange Nettoresultat user input )
+  getNettoResultatInput(netResult: any) {
+    this.displayNetResult = netResult
   }
 
-  // method to calculate total company bonus
-  calculateTotalBonus() {
-    const bonusPercentage = 0.05;
-    this.bonusPott = Number(this.displayNetResult) * bonusPercentage
-    const kBonus = this.bonusPott * ((this.lojFactor * this.debHours) / this.totalBonusHours)
-    return Math.round(kBonus);
+  // calculate bonus in SEK (Bonus SEK column)
+  // interpolation of bonusPott {{bonusPott}} in HTML
+  calculateConsultantBonus(hours: any) {
+    this.bonusPott = Number(this.displayNetResult) * this.bonusPercentage // calculates BonusPott
+    const KonsultBonusSEK = Math.round(((this.lojFactor * hours) / this.totalBonusHours) * this.bonusPott);
+    return KonsultBonusSEK;
   }
 }
-
-
-

@@ -14,14 +14,6 @@
       "lastName": "Aguilera",
       "debHours": 150,
       "startingDate": "2019-04-05"
-    },
-    {
-      "id": 5,
-      "firstName": "stefan",
-      "lastName": "Brunotte",
-      "debHours": 100,
-      "bonusPercent": 0,
-      "startingDate": "2022-02-19"
     }
   ],
   "comments": [],

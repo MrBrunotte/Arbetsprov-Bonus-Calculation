@@ -2,24 +2,23 @@
 <p>För att räkna ut konsultbonusar följ dessa steg:</p>
 <ul>
   <li>Ange nettoresultat</li>
-  <li>Lägg till timmar för varje konsult</li>
-  <li>Clicka på "Beräkna bonusar"</li>
+  <li>Lägg till/uppdatera timmar för varje konsult</li>
 </ul>
 <hr />
 
 <div class="row justify-content-start">
-  <div class="col-5">
+  <div class="col-4">
     <div class="input-group mb-3 nettoResultatBox">
-      <span class="input-group-text">Ange Nettoresultat:</span>
+      <span class="input-group-text colorGisys">Ange Nettoresultat:</span>
       <input type="text" #box (keyup)="getNettoResultatInput(box.value)" name="nettoResultatInput" class="form-control" aria-label="Ange Netto resultat">
       <!--<button (click)="calculateTotalBonus()" class="btn myBtn myBtnSubmit" type="button">Beräkna</button>-->
     </div>
   </div>
-  <div class="col-2">
-    <p>Netto resultat: <span class="myBoldText">{{displayNetResult}} kr</span></p>
+  <div class="col-3">
+    <p>Netto resultat: <span class="myBoldText">{{displayNetResult | number}} kr</span></p>
   </div>
   <div class="col-2">
-    <p>Bonuspott: <span class="myBoldText">{{bonusPott}} kr</span></p>
+    <p>Bonuspott: <span class="myBoldText">{{bonusPott | number}} kr</span></p>
   </div>
   <div class="col-3">
     <p>Totala bonus timmar: <span class="myBoldText">{{totalBonusHours}} tim</span></p>
@@ -48,21 +47,21 @@
       <td class="">{{row.lastName}}</td>
       <td class="centerText">{{row?.startingDate | date: 'yyyy-MM-dd'}}</td>
       <td class="centerText">{{row?.debHours}} tim</td>
-      <td class="debHours">{{calculateLojFactor(row?.startingDate)}}x</td>
+      <td class="debHours">{{calculateLojaltyFactor(row?.startingDate)}}x</td>
       <td class="debHours">{{calculateEmploymentDays(row?.startingDate) * row.debHours}} tim</td>
-      <td class="debHours">{{calculateBonusPercent(row?.debHours)}} %</td>
-      <td class="debHours">{{calculateTotalBonus()}} kr</td>
+      <td class="debHours">{{calculateBonusPercent(row?.debHours)}}</td>
+      <td class="debHours">{{calculateConsultantBonus(row?.debHours)}} kr</td>
       <td class="btnRight">
         <button class="btn myBtn myBtnCreate ms-3" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" (click)="onEdit(row)">Lägg till timmar</button>
       </td>
     </tr>
   </tbody>
 </table>
-<div class="row justify-content-end">
+<!--<div class="row justify-content-end">
   <div class="col-2 btnRight">
-    <button (click)="calculateTotalBonus()" class="btn myBtn  myCalculateBonus" type="button">Beräkna bonusar</button>
+    <button (click)="calculateConsultantBonus(debHours)" class="btn myBtn  myCalculateBonus" type="button">Beräkna bonusar</button>
   </div>
-</div>
+</div>-->
 
 
 

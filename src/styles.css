@@ -8,6 +8,10 @@ a:hover {
   color: white !important;
   font-weight: 700 !important;
 }
+.colorGisys {
+  background-color: #2abb9b!important;
+  color: white !important;
+}
 /* -----Navbar and link styles----- */
 .myNavbar {
   background-color: #2ABB9B;
