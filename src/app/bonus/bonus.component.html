@@ -35,7 +35,7 @@
       <th class="col konsultContent centerText">Timmar</th>
       <th class="col konsultContent centerText">Bonus faktor</th>
       <th class="col konsultContent centerText">Bonus grund</th>
-      <th class="col konsultContent centerText">Bonus %</th>
+      <th class="col konsultContent centerText">Bonus andel</th>
       <th class="col konsultContent centerText">Bonus SEK</th>
     </tr>
   </thead>
@@ -48,7 +48,7 @@
       <td class="centerText">{{row?.debHours}} tim</td>
       <td class="debHours">{{calculateLojaltyFactor(row?.startingDate)}}x</td>
       <td class="debHours">{{calculateEmploymentDays(row?.startingDate) * row.debHours}} tim</td>
-      <td class="debHours">{{calculateBonusPercent(row?.debHours)}}</td>
+      <td class="debHours">{{calculateBonusPercent(row?.debHours)}} %</td>
       <td class="debHours">{{calculateConsultantBonus(row?.debHours)}} kr</td>
       <td class="btnRight">
         <button class="btn myBtn myBtnCreate ms-3" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" (click)="onEdit(row)">Lägg till timmar</button>

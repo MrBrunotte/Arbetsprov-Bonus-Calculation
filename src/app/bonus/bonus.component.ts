@@ -122,7 +122,7 @@ export class BonusComponent implements OnInit{
   }
   // calculate bonus in percent (Bonus % column)
   calculateBonusPercent(hours: any) {
-    let bonusPercent = (this.lojFactor * hours / this.totalBonusHours).toFixed(3);
+    let bonusPercent = ((this.lojFactor * hours / this.totalBonusHours) * 100).toFixed(2);
     return bonusPercent;
   }
 
