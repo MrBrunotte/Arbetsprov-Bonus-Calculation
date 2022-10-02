@@ -30,7 +30,7 @@ Functionality to calculate all consultants individual bonuses. You should be abl
       - go to: http://localhost:3000/posts
   2. Open a terminal and run the program
       - npm start
-      - open your browser and go to: http://localhost:4200/ (or whatever port you are using)
+      - open your browser and go to: http://localhost:3000/ (or whatever port you are using)
 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.2.
