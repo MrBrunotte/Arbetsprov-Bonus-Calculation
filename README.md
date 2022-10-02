@@ -24,6 +24,8 @@ Functionality to calculate all consultants individual bonuses. You should be abl
 ## start the program
 
   1. start the JSON server with the command: 
+      - [JSON server installation instructions](https://www.npmjs.com/package/json-server)
+      - npm install -g json-server
       - json-server --watch db.json
       - go to: http://localhost:3000/posts
   2. Open a terminal and run the program
